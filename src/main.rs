@@ -18,7 +18,7 @@ fn process_request(mut stream: TcpStream)
     .take_while(|line|{! line.is_empty()})
     .collect();
 
-    let response = "HTTP/1.1 200 ok \r\n Content-Type: application/json \r\n";
+    let response = "HTTP/1.1 200 ok \r\n Content-Type: application/json \r\n\r\n";
     let json_response = r#"{"Mina":"is Awesome"}"#;
     let response = format!("{} {}",response,json_response.escape_default());
     println!("{}",response);
