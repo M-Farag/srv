@@ -6,3 +6,4 @@ I'm building it to have a simple web server that I can use to serve static files
 
 ### Next
 - Serve a PHP application
+- Serve a Python application
