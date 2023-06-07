@@ -22,9 +22,21 @@ fn process_request(mut stream: TcpStream)
     // let response = "HTTP/1.1 200 ok \r\n Content-Type: application/json \r\n\r\n";
     // let json_response = r#"{"Mina":"is Awesome"}"#;
     // let response = format!("{} {}",response,json_response.escape_default());
-    let contents = fs::read_to_string("index.html").unwrap();
+    let file_name;
+    let status_line;
+    if http_request[0].contains("GET / HTTP/1.1")
+    {
+       file_name = "index.html";
+       status_line = "HTTP/1.1 200 loading index";
+    }
+    else
+    {
+        file_name = "404.html";
+        status_line = "HTTP/1.1 404 Page not found";
+    }
+    let contents = fs::read_to_string(file_name).unwrap();
     let contents_len = contents.len();
-    let status_line = "HTTP/1.1 200 loading index";
+    
     let headers = format!("Content-Length: {}",contents_len);
     let response = format!("{}\r\n{}\r\n\r\n{}",status_line,headers,contents);
     stream.write_all(response.as_bytes()).unwrap()
