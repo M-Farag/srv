@@ -19,21 +19,6 @@ fn process_request(mut stream: TcpStream)
     .take_while(|line|{! line.is_empty()})
     .collect();
 
-    // let response = "HTTP/1.1 200 ok \r\n Content-Type: application/json \r\n\r\n";
-    // let json_response = r#"{"Mina":"is Awesome"}"#;
-    // let response = format!("{} {}",response,json_response.escape_default());
-    // let file_name: &str;
-    // let status_line: &str;
-    // if http_request[0].contains("GET / HTTP/1.1")
-    // {
-    //    file_name = "index.html";
-    //    status_line = "HTTP/1.1 200 loading index";
-    // }
-    // else
-    // {
-    //     file_name = "404.html";
-    //     status_line = "HTTP/1.1 404 Page not found";
-    // }
     
     let (status_line,file_name) = match &http_request[0][..]
     {
